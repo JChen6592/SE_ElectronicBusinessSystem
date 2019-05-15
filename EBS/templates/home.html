@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+</div class="row">
+	{% for product in sales %}
+	<div class="column">
+		<div class="w3-row w3-grayscale">
+    		<div class="w3-col l3 s6">
+      			<div class="w3-container">
+        			<img src="{{ product.product_image.url }}" style="width:100%">
+        			<p>
+        			<br><b>Product Name: {{ product.product_name }}</b>
+        			<br><b>Sell Type: {{ product.sell_type }}</b>
+        			<br><b>Description: {{ product.description }}</b>
+        			<br><b>Price: $24.99</b>
+        			</p>
+                    {% if product.sell_type == 'Bid' %}
+                    <a href = "{% url 'bid_item' %}">
+                        <button class = 'btn btn-primary' type ='button submit'>Place a Bid</button>
+                    </a>
+                    {% else %}
+                    <a class = "btn-link" href="{% url 'cart' %}">
+                        <button class = 'btn btn-primary' type ='button submit'>Add to Cart</button>
+                    </a>
+                    {% endif %}
+      			</div>
+ 			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}  

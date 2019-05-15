@@ -1,0 +1,10 @@
+{% block content %}
+<div class='container'>
+  <h2>Add to Taboo Word List</h2>
+  <form method="POST" class="message-form">{% csrf_token %}
+      {{ form.as_p }}
+    <button class='btn btn-success' type="button submit" class="save">Add</button>
+    <a href="{% url 'home' %}" class='btn btn-primary' role='button'>Cancel</a>
+  </form>
+</div>
+{% endblock %}

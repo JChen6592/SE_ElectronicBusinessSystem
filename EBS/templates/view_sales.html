@@ -1,0 +1,15 @@
+{% block content %}
+{% load static %}
+	{% for product in num_posts %}
+		<article class="media content-section">
+			<div class="media-body">
+				<div class="article-metadata">
+					<a class="mr-2" href="#">Product name:</a><p>{{ product.product_name }}</p>
+					<p class ="article-title">Sell Type: {{ product.sell_type }}</p>
+					<p class="article-content">Product Image:</p> <img src="{{ product.product_image.url }}" style="width:200px;height:200px"><br>
+					<p class="article-content">Product Description: {{ product.description }}</p>
+				</div>
+			</div>
+		</article>
+	{% endfor %}
+{% endblock %}

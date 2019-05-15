@@ -1,0 +1,23 @@
+{% block content %}
+
+<div class='container'>
+<h1>Taboo Words</h1>
+{% if num_taboo > 0 %}
+    {% for taboo in taboowords %}
+        <div class='card'>
+                <p class='card-text'>{{ taboo.word }}</p>
+        </div>
+        {% endfor %}
+</div>
+{% else %}
+    <div class='alert alert-secondary'>No Taboo Words listed.</div>
+{% endif %}
+<div class='container' style='padding: 15px'>
+    {% if num_messages %}
+    <a href = {% url 'delete_message' %} class='btn btn-danger' role='button'>Delete</a>
+    {% else %}
+    <a href='#' class='btn btn-danger disabled' role='button'>Delete</a>
+    {% endif %}
+    <a href = {% url 'home' %} class='btn btn-primary' role='button' = none>Back</a>
+</div>
+{% endblock content %}

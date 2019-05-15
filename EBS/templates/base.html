@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href= "{% static 'blog/main.css' %}">
+<style>
+.column {
+	float:right;
+	width: 50%;
+	padding: 50px;
+}
+
+.row:after {
+	content: " ";
+	display: table;
+	clear:both;
+}
+</style>
+</head>
+<body background="https://d4vj4z0ojbtdv.cloudfront.net/blog/wp-content/uploads/2018/07/artificial-intelligence-in-ecommerce-zepo-blog-india.jpg">
+	<div class="w3-container w3-padding-64 w3-center" id="Presentation">
+	<h2>PJFC: Electronic Business System</h2>
+	{% if user.is_authenticated %}
+	<p> Find your items today! </p>
+	{% else %}
+	<p>Apply, Signup, Purchase</p>
+	{% endif %}
+	</div>
+
+	{% if user.is_authenticated %}
+
+
+	<!-- seach bar -->
+	<form class = "navbar-form navbar-right" role = "search" action = "/s/">
+		<div class = "form-group">
+		<input type = "text" class = "form-control" name ="q" placeholder="Search">
+		</div>
+		<div class = "center-block">
+			<button type = "submit" class = "btn btn-default">Submit</button>
+		</div>
+	</form>
+		 
+			<!--end of search bar -->
+
+
+	{% if user.user_type == 0 %}
+
+	    <div class='container center-block text-center'>
+                {% if user.was_denied == True %}
+                    <div class='alert alert-danger' role='alert'>
+                        Your OU form was rejected, please resubmit!
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+		<nav class="navbar navbar-default">
+			<div class="w3-top w3-center">
+		 		<div class="w3-bar w3-theme-d2">
+		  			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large 	w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+		  			{% if user.user_type == 0 %}
+		  			<a href="{% url 'submit_ouform' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Apply for OU!</a>
+		  			{% endif %}
+		  			<a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Logout</a>
+		  		</div>
+			</div>
+		</nav>
+
+	{% elif user.user_type == 1 %}
+		<nav class="navbar navbar-default">
+			<div class="w3-top w3-center">
+		 		<div class="w3-bar w3-theme-d2">
+		  			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large 	w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+		  			<a href="{% url 'file_complaint' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">File Complaint</a>
+		  			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Messages</a>
+		  			<a href={% url 'friendlist' %} class= "w3-bar-item w3-button w3-hide-small w3-hover-white">Friend List</a>
+		  			<a href="{% url 'sell_post' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Sell Items</a>
+		  			<a href="{% url 'view_profile' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Profile</a>
+		  			 <a href={% url 'search_user' %} class="w3-bar-item w3-button w3-hide-small w3-hover-white">Search Users</a>
+		  			<a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Logout</a>
+		  		</div>
+			</div>
+		</nav>
+
+	{% elif user.user_type == 2 %}
+		<nav class="navbar navbar-default">
+			<div class="w3-top w3-center">
+		 		<div class="w3-bar w3-theme-d2">
+		 			<a href={% url 'search_user' %} class="w3-bar-item w3-button w3-hide-small w3-hover-white">Search Users</a> 
+		 			<a href={% url 'select_form' %} class="w3-bar-item w3-button w3-hide-small w3-hover-white">OU Forms</a>
+		  			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large 	w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+		  			<a href={% url 'view_complaint' %} class="w3-bar-item w3-button w3-hide-small w3-hover-white">Complaint Forms
+		  				<span class='badge badge-light'>{{ num_complaints }}</span>
+		  			</a>
+		  			<a href={% url 'select_form' %} class="w3-bar-item w3-button w3-hide-small w3-hover-white">OU Forms
+						<span class='badge badge-light'>{{ num_advise }}</span>
+		  			</a>
+		  			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Messages</a>
+		  			<a href="{% url 'view_taboo' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Taboo Word List
+						<span class='badge badge-light'>{{ num_taboo }}</span>
+		  			</a>
+		  			<a href="{% url 'add_taboo' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Add Taboo Words</a>
+		  			<a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Profile</a>
+		  			<a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Logout</a> 
+		  		</div>
+			</div>
+		</nav>
+	{% endif %}
+
+{% else %}
+	<div class="container h-100 center-block text-center">
+    	<div class="row align-items-center h-100">
+        	<div class="col-6 mx-auto">
+            	<div class="jumbotron">
+                	<p>To be an Ordinary User, sign up as Guest first!</p>
+                	<a href="{% url 'login' %}" class='btn btn-primary' role='button'>Login</a>
+               		<a href="{% url 'signup' %}" class='btn btn-primary' role='button'>Sign Up</a>
+            	</div>
+       		</div>
+    	</div>
+	</div>
+{% endif %}
+
+	
+{% if user.user_type == 0 or user.user_type == 1 or user.user_type == 2 %}
+	{% block content %}
+	{% endblock %}
+{% endif %}
+
+
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

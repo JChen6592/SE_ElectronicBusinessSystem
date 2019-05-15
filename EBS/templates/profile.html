@@ -1,0 +1,20 @@
+{% block content %}
+<h2>Hello {{ user.first_name }} {{ user.last_name }}! Welcome to your profile page!</h2>
+    <div class="content-section w3-container" style="max-width:1400px;margin-top:80px">
+      <div class="w3-col m4">
+        <div class="media">
+          <div class="media-body">
+            <p class="w3-align center">Username: {{ user.username }}</p>
+            <p class="text-secondary">UserID: {{ user.id }}</p>
+            <p class="text-secondary">First name: {{ user.first_name }}</p>
+            <p class="text-secondary">Last name: {{ user.last_name }}</p>
+            <p class="text-secondary">Email Address: {{ user.email }}</p>
+            <p class="text-secondary">Address: {{ user.address }}</p>
+            <p class="text-secondary">Credit Card: {{ user.credit_card }}</p>
+          </div>
+          <a href="{% url 'edit_profile' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Edit Profile</a>
+          <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Back</a>
+        </div>
+      </div>
+  </div>
+{% endblock content %}

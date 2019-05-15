@@ -1,0 +1,19 @@
+{% block content %}
+
+<div class='container'>
+	<h1>Delete Taboo Words</h1>
+	{% if inbox %}
+	<form method="POST" id="to-delete">{% csrf_token %}
+		<select id='to-delete' name='to-delete'>
+			{% for taboo in inbox %}
+			<option value={{ taboo.id }}>{{ taboo.word }}</option>
+			{% endfor %}
+	</select>
+	<button class='btn btn-primary' type="button Submit">Delete</button>
+		<a href={% url 'view_taboo' %} class='btn btn-primary' role='button'>Cancel</a>
+	</form>
+	{% else %}
+	<div class='alert alert-primary'>No Taboo Words.</div>
+	<a href={% url 'view_taboo' %} class='btn btn-primary' role='button'>Back</a>
+	{% endif %}
+{% endblock %}

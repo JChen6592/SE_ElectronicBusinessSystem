@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Searched For: {{query}}</title>
+     </head>
+     <style>
+     body {
+        background-image: url("https://d4vj4z0ojbtdv.cloudfront.net/blog/wp-content/uploads/2018/07/artificial-intelligence-in-ecommerce-zepo-blog-india.jpg");
+        background-repeat: no-repeat;
+        background-position:unset;
+        background-size:cover;
+      }
+      </style>
+     <body>
+        <h2> Searched For: {{query}}</h2>
+    
+        {% for product in products %}
+        <h3>{{product.product_name}} </h3>
+        <p> <img src =  {{product.product_image.url}} width="200" height="200">
+            <br>
+            {{product.sell_type}}
+            {{product.description}}   
+        </p> 
+
+        {% empty %}  <!-- if the QuerySet is empty it will print this -->
+        <p>No Results matching: {{query}}</p>
+    
+        {% endfor %}
+
+     </body>
+</html>

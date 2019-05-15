@@ -1,0 +1,16 @@
+{% block content %}
+<div class='container' style='padding: 15px'>
+    <h2>Place a Bid</h2>
+    <form method="POST" class="advising-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button class='btn btn-primary save' type="submit button" onclick = "myFunction()">Submit</button>
+        <p id="demo"></p>
+        <script>
+      	function myFunction() {
+        	document.getElementById("demo").innerHTML = "Thank you for placing a bid";
+      	}
+search_user.html
+        <a href="{% url 'home' %}" class='btn btn-primary' type='button'>Cancel</a>
+    </form>
+</div>
+{% endblock %}

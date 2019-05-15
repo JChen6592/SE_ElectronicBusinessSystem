@@ -1,0 +1,19 @@
+{% block content %}
+
+<div class='container'>
+	<h1>Delete Complaint Forms</h1>
+	{% if inbox %}
+	<form method="POST" id="to-delete">{% csrf_token %}
+		<select id='to-delete' name='to-delete'>
+			{% for complaints in inbox %}
+			<option value={{ complaints.id }}>{{ complaints.culprit }}</option>
+			{% endfor %}
+	</select>
+	<button class='btn btn-primary' type="button Submit">Delete</button>
+		<a href={% url 'view_taboo' %} class='btn btn-primary' role='button'>Cancel</a>
+	</form>
+	{% else %}
+	<div class='alert alert-primary'>No Complaints.</div>
+	<a href={% url 'view_complaint' %} class='btn btn-primary' role='button'>Back</a>
+	{% endif %}
+{% endblock %}
