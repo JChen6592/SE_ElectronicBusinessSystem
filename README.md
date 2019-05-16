@@ -8,14 +8,13 @@ Christian Castro,
 Fayrouz Mikhael,
 
 #### Prerequisites:
-Have python 3 installed and Django 
+#Have python 3 installed and Django 
 
 #### Note:
-The super user's login information is:
+#The super user's login information is:
 
-Username: P
-
-Password: Ppassword
+#Username: P
+#Password: Ppassword
 
 
 #### Project Statement:
